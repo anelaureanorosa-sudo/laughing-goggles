@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preserve o Meio Ambiente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Consciência Verde</h1>
+        <p>Pequenas ações, grandes mudanças para o nosso planeta.</p>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Por que cuidar do Meio Ambiente?</h2>
+            <p>O futuro da Terra está em nossas mãos. Proteger a natureza, reduzir o desperdício e economizar recursos são passos essenciais para garantir a vida das próximas gerações.</p>
+        </section>
+
+        <section class="dicas">
+            <h2>Dicas de Sustentabilidade</h2>
+            <div class="cards-grid">
+                <div class="card" onclick="mostrarDetalhes('agua')">
+                    <h3>💧 Economize Água</h3>
+                    <p>Clique para ver como ajudar.</p>
+                </div>
+                <div class="card" onclick="mostrarDetalhes('reciclagem')">
+                    <h3>♻️ Recicle</h3>
+                    <p>Clique para ver como ajudar.</p>
+                </div>
+                <div class="card" onclick="mostrarDetalhes('energia')">
+                    <h3>💡 Poupe Energia</h3>
+                    <p>Clique para ver como ajudar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="painel-info" class="painel escondido">
+            <h3 id="titulo-info"></h3>
+            <p id="texto-info"></p>
+            <button onclick="fecharPainel()">Fechar</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Desenvolvido em prol do Meio Ambiente</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Conteúdo Principal */
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.intro {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.intro h2, .dicas h2 {
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+/* Grade de Cartões (Grid) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 5px solid #4caf50;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+    color: #1b5e20;
+}
+
+/* Painel de Informações Interativo */
+.painel {
+    background-color: #e8f5e9;
+    border: 2px solid #81c784;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.escondido {
+    display: none;
+}
+
+.painel button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.painel button:hover {
+    background-color: #1b5e20;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #333;
+    color: white;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+// Objeto contendo as informações das dicas
+const informacoes = {
+    agua: {
+        titulo: "Dicas para economizar Água",
+        texto: "Feche a torneira enquanto escova os dentes, reduza o tempo no banho e conserte vazamentos rapidamente. Reutilizar a água da chuva para lavar o quintal também ajuda muito!"
+    },
+    reciclagem: {
+        titulo: "Como reciclar corretamente",
+        texto: "Separe o lixo orgânico (restos de comida) do lixo reciclável (papel, plástico, vidro e metal). Lave as embalagens antes de descartar para evitar mau cheiro e ajudar os catadores."
+    },
+    energia: {
+        titulo: "Reduza o consumo de Energia",
+        texto: "Apague as luzes ao sair de um cômodo, aproveite a luz natural do dia e tire os aparelhos eletrônicos da tomada quando não estiverem em uso (modo stand-by também gasta energia!)."
+    }
+};
+
+// Função para mostrar o painel com as informações detalhadas
+function mostrarDetalhes(tipo) {
+    const painel = document.getElementById('painel-info');
+    const titulo = document.getElementById('titulo-info');
+    const texto = document.getElementById('texto-info');
+
+    // Insere os dados baseados no cartão clicado
+    titulo.innerText = informacoes[tipo].titulo;
+    texto.innerText = informacoes[tipo].texto;
+
+    // Remove a classe que esconde o painel
+    painel.classList.remove('escondido');
+}
+
+// Função para fechar/esconder o painel
+function fecharPainel() {
+    const painel = document.getElementById('painel-info');
+    painel.classList.add('escondido');
+}
